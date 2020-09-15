@@ -1,16 +1,28 @@
+import os
 import wasabi_conf
 
-#file_name=input("Enter the name of the file that should be in s3")
-#file_dir=input("Enter the directory of the file")
+def folder_list(path):
+	dir=path
+	os.chdir(dir)
+	subfolders_names = [ f.name for f in os.scandir('.') if f.is_dir() ]
+	subfolders_names.append('.')
+	#subfolders_dir = [ f.path for f in os.scandir('.') if f.is_dir() ]
+	return(subfolders_names)
 
-choice=input("Want to insert a file in s3 press F or for a Folder/Directory press D: ")
+def file_list(path):
+	dir=path
+	os.chdir(dir)
+	with os.scandir('.') as it:
+		for entry in it:
+			if entry.is_file():
+				files.append(entry.name)
+	return files
 
-if(choice=='F' or choice=='f'):
-	file_name=input("Enter the name of the file that should be in s3: ")
-	file_dir=input("Enter the directory of the file: ")
-	wasabi_conf.send_file(file_name,file_dir)
-elif(choice=='D' or choice=='d'):
-	folder_name=input('Enter folder name for s3')
-	if(folder_name != ''):
-		wasabi_conf.create_folder(folder_name)
-	dir_path=input('Enter the path of the directory/folder: ')
+
+
+
+
+#for i in subfolders_name
+#wasabi_conf.send_file(file_name,file_dir)
+
+#wasabi_conf.create_folder(folder_name)
